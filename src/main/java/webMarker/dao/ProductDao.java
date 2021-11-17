@@ -1,17 +1,16 @@
 package webMarker.dao;
 
 import webMarker.model.Product;
-import webMarker.service.DataSource;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDao implements DataResource {
-    private DataSource dataSource;
+    private final DataSource dataSource;
 
-    public ProductDao(DataSource dataSource) {
-        this.dataSource = dataSource;
+    public ProductDao(DataSource postgresSource) {
+        this.dataSource = postgresSource;
     }
 
     @Override
@@ -23,6 +22,7 @@ public class ProductDao implements DataResource {
         try(PreparedStatement statement = dataSource.getPrepareStatement("SELECT * FROM products WHERE id=?")) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
             product.setId(id);
             product.setName(resultSet.getString("name"));
             product.setPrice(resultSet.getBigDecimal("price"));

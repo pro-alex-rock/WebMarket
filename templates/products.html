@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -13,11 +14,27 @@
 
 <h2>Hello!</h2>
 <table>
-    <ul>
-        <#list products as item>
-            <li>${item}</li>
-        <#list>
-    </ul>
+    <thead>
+    <tr>id</tr>
+    <tr>name</tr>
+    <tr>price</tr>
+    </thead>
+    <tbody>
+    <tr>
+    <!--<ul>
+        <#list products as product>
+            <li>"${product.id}"</li>
+            <li>"${product.name}"</li>
+            <li>"${product.price}"</li>
+        </#list>
+    </ul>-->
+        <#list products as product>
+            <td>${product.id}</td>
+            <td>${product.name}</td>
+            <td>${product.price}</td>
+        </#list>
+    </tr>
+    </tbody>
 </table>
 </body>
 </html>

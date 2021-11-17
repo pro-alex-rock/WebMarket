@@ -3,7 +3,6 @@ package webMarker.dao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import webMarker.service.DataSource;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,7 +15,7 @@ class ProductDaoTest {
     @Mock
     DataResource mockProductDao;
     @Mock
-    DataSource mockDataSource;
+    DataSource mockPostgresSource;
     @Mock
     Connection mockConnection;
     @Mock
@@ -28,16 +27,16 @@ class ProductDaoTest {
 
     @BeforeEach
     public void setUp() throws SQLException {
-        when(mockDataSource.getConnection()).thenReturn(mockConnection);
-        when(mockDataSource.getPrepareStatement(query)).thenReturn(mockPreparedStmnt);
+        when(mockPostgresSource.getConnection()).thenReturn(mockConnection);
+        when(mockPostgresSource.getPrepareStatement(query)).thenReturn(mockPreparedStmnt);
     }
 
 
     @Test
     public void ddd() throws SQLException {
         query = "SELECT * FROM products WHERE id=?";
-        when(mockDataSource.getConnection()).thenReturn(mockConnection);
-        when(mockDataSource.getPrepareStatement(query)).thenReturn(mockPreparedStmnt);
+        when(mockPostgresSource.getConnection()).thenReturn(mockConnection);
+        when(mockPostgresSource.getPrepareStatement(query)).thenReturn(mockPreparedStmnt);
     }
 
 }

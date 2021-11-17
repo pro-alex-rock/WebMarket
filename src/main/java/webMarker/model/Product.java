@@ -1,17 +1,18 @@
 package webMarker.model;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class Product {
-    private long id;
+    private int id;
     private String name;
     private BigDecimal price;
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -29,5 +30,29 @@ public class Product {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Product)) return false;
+        Product product = (Product) o;
+        return getId() == product.getId() &&
+                getName().equals(product.getName()) &&
+                Objects.equals(getPrice(), product.getPrice());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getName(), getPrice());
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                '}';
     }
 }
