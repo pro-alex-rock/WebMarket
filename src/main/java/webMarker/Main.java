@@ -14,7 +14,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
 
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
-        context.addServlet(new ServletHolder(new AllRequestsServlet()), "/*");
+        context.addServlet(new ServletHolder(new HomeServlet()), "/");
         context.addServlet(new ServletHolder(new ProductsServlet()), "/products");
         context.addServlet(new ServletHolder(new ItemServlet()), "/product");
         context.addServlet(new ServletHolder(new AddServlet()), "/products/add");

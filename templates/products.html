@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
     <title>HelloPage</title>
 </head>
 <body>
@@ -12,29 +13,36 @@
     <input type="submit" value="Ok">
 </form>
 
-<h2>Hello!</h2>
-<table>
+<div class="products">
+<table border="1">
     <thead>
-    <tr>id</tr>
-    <tr>name</tr>
-    <tr>price</tr>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>price</th>
+        </tr>
     </thead>
     <tbody>
-    <tr>
-    <!--<ul>
         <#list products as product>
-            <li>"${product.id}"</li>
-            <li>"${product.name}"</li>
-            <li>"${product.price}"</li>
+            <tr>
+                <td>${product.id}</td><br>
+                <td>${product.name}</td><br>
+                <td>${product.price}</td><br>
+                <td>
+                    <button onclick="document.location='/add.html'">Update</button>
+                </td>
+                <td>
+                    <!--<form action="/products/delete" method="post">
+                    <button type="submit" onclick="document.location='/products.html'">Delete</button>
+                    </form>-->
+                    <button type="submit" onclick="document.location='/products/delete'">Delete</button>
+                </td>
+            </tr>
         </#list>
-    </ul>-->
-        <#list products as product>
-            <td>${product.id}</td>
-            <td>${product.name}</td>
-            <td>${product.price}</td>
-        </#list>
-    </tr>
-    </tbody>
+    </tbody><br><br>
 </table>
+    <button onclick="document.location='/add.html'">Add product</button>
+</div>
+
 </body>
 </html>
