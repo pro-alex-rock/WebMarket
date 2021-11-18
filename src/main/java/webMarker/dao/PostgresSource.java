@@ -5,7 +5,7 @@ import webMarker.dao.DataSource;
 import java.sql.*;
 
 public class PostgresSource implements DataSource {
-    private static final String URL = "jdbc:postgresql://localhost:5432/product_db";
+    private static final String URL = "jdbc:postgresql://localhost:5432/postgres";
     private static final String USERNAME = "postgres";
     private static final String PASSWORD = "postgres";
 
