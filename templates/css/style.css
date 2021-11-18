@@ -1,5 +1,16 @@
-.products {
+.products{
     background-color: aqua;
     font-style: italic;
     padding: 2%;
+}
+.input-product{
+    display: block;
+    align-self: center;
+    align-items: center;
+    background-color: #F0FFFF;
+    border: solid 	#F0F8FF;
+    margin: auto;
+    padding: 2%;
+    width:25%;
+    height:300px;
 }

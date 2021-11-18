@@ -21,8 +21,8 @@ public class ProductDao implements DaoResource {
     }
 
     private int getLastId() {
-        try(PreparedStatement statement = dataSource.getPrepareStatement("SELECT MAX(id) as id FROM products")) {
-            ResultSet resultSet = statement.executeQuery();
+        try(PreparedStatement statement = dataSource.getPrepareStatement("SELECT MAX(id) as id FROM products;");
+            ResultSet resultSet = statement.executeQuery()) {
             resultSet.next();
             try {
                 id = resultSet.getInt("id");
@@ -46,9 +46,10 @@ public class ProductDao implements DaoResource {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             resultSet.next();
-                product.setId(id);
+            product.setId(id);
             product.setName(resultSet.getString("name"));
             product.setPrice(resultSet.getBigDecimal("price"));
+            resultSet.close();
         } catch (SQLException e) {
             logger.info("Couldn`t select product {} from db", id);
             throw new RuntimeException("Couldn`t select product " + id + " from db", e);
@@ -61,8 +62,8 @@ public class ProductDao implements DaoResource {
     @Override
     public List<Product> selectAll() {
         List<Product> products = new ArrayList<>();
-        try(PreparedStatement statement = dataSource.getPrepareStatement("SELECT * FROM products")) {
-            ResultSet resultSet = statement.executeQuery();
+        try(PreparedStatement statement = dataSource.getPrepareStatement("SELECT * FROM products");
+            ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {
                 Product product = new Product();
                 product.setId(resultSet.getInt("id"));
