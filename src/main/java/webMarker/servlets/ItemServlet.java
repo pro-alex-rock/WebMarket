@@ -1,6 +1,6 @@
 package webMarker.servlets;
 
-import webMarker.dao.DataResource;
+import webMarker.dao.DaoResource;
 import webMarker.dao.DataSource;
 import webMarker.dao.PostgresSource;
 import webMarker.model.Product;
@@ -18,7 +18,7 @@ import java.util.Map;
 
 public class ItemServlet extends HttpServlet {
     private final DataSource dataSource = new PostgresSource();
-    private final DataResource productDao = ProductDaoFactory.getInstance(dataSource);
+    private final DaoResource productDao = ProductDaoFactory.getInstance(dataSource);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

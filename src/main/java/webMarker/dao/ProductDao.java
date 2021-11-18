@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductDao implements DataResource {
+public class ProductDao implements DaoResource {
     private static final Logger logger = LoggerFactory.getLogger(ProductDao.class);
     private final DataSource dataSource;
     private int id;

@@ -1,13 +1,13 @@
 package webMarker.service;
 
-import webMarker.dao.DataResource;
+import webMarker.dao.DaoResource;
 import webMarker.dao.DataSource;
 import webMarker.dao.ProductDao;
 
 public class ProductDaoFactory {
-    private static DataResource productDao;
+    private static DaoResource productDao;
 
-    public static DataResource getInstance(DataSource dataSource) {
+    public static DaoResource getInstance(DataSource dataSource) {
         if (productDao == null) {
             productDao = new ProductDao(dataSource);
         }

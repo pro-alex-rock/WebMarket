@@ -13,7 +13,7 @@ import static org.mockito.Mockito.when;
 
 class ProductDaoTest {
     @Mock
-    DataResource mockProductDao;
+    DaoResource mockProductDao;
     @Mock
     DataSource mockPostgresSource;
     @Mock

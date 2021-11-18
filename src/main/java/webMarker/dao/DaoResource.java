@@ -4,7 +4,7 @@ import webMarker.model.Product;
 
 import java.util.List;
 
-public interface DataResource {
+public interface DaoResource {
     Product selectOne(int id);
 
     List<Product> selectAll();
