@@ -6,14 +6,7 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import webMarker.dao.DataResource;
-import webMarker.dao.DataSource;
-import webMarker.dao.PostgresSource;
-import webMarker.model.Product;
-import webMarker.service.ProductDaoFactory;
 import webMarker.servlets.*;
-
-import java.math.BigDecimal;
 
 public class Main {
         private static final Logger logger = LoggerFactory.getLogger(Main.class);
