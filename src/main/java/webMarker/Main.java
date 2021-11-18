@@ -6,7 +6,7 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import webMarker.servlets.*;
+import webMarker.servlet.*;
 
 public class Main {
         private static final Logger logger = LoggerFactory.getLogger(Main.class);

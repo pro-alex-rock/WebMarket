@@ -1,4 +1,4 @@
-package webMarker.service;
+package webMarker.configuration;
 
 import webMarker.dao.DaoResource;
 import webMarker.dao.DataSource;

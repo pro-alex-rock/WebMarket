@@ -1,4 +1,4 @@
-package webMarker.service;
+package webMarker.configuration;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;

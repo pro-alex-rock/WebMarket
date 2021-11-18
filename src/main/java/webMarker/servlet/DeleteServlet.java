@@ -1,10 +1,12 @@
-package webMarker.servlets;
+package webMarker.servlet;
 
+import webMarker.configuration.ServiceFactory;
 import webMarker.dao.DaoResource;
 import webMarker.dao.DataSource;
 import webMarker.dao.PostgresSource;
-import webMarker.service.PageGenerator;
-import webMarker.service.ProductDaoFactory;
+import webMarker.configuration.PageGenerator;
+import webMarker.configuration.ProductDaoFactory;
+import webMarker.service.Service;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,13 +17,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DeleteServlet extends HttpServlet {
-    private final DataSource dataSource = new PostgresSource();
-    private final DaoResource productDao = ProductDaoFactory.getInstance(dataSource);
+    private final Service service = ServiceFactory.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Map<String, Object> pageVariables = createPageVariablesMap(req);
-        productDao.delete(Integer.parseInt(req.getParameter("id")));
+        service.delete(Integer.parseInt(req.getParameter("id")));
         String message = req.getParameter("message");
         pageVariables.put("message", message == null ? "" : message);
         resp.setContentType("text/html;charset=utf-8");

@@ -1,11 +1,13 @@
-package webMarker.servlets;
+package webMarker.servlet;
 
+import webMarker.configuration.ServiceFactory;
 import webMarker.dao.DaoResource;
 import webMarker.dao.DataSource;
 import webMarker.dao.PostgresSource;
 import webMarker.model.Product;
-import webMarker.service.PageGenerator;
-import webMarker.service.ProductDaoFactory;
+import webMarker.configuration.PageGenerator;
+import webMarker.configuration.ProductDaoFactory;
+import webMarker.service.Service;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,14 +19,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ItemServlet extends HttpServlet {
-    private final DataSource dataSource = new PostgresSource();
-    private final DaoResource productDao = ProductDaoFactory.getInstance(dataSource);
+    private final Service service = ServiceFactory.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Map<String, Object> pageVariables = createPageVariablesMap(req);
         pageVariables.put("message", "");
-        Product product = productDao.selectOne(Integer.parseInt(req.getParameter("id")));
+        Product product = service.selectOne(Integer.parseInt(req.getParameter("id")));
         pageVariables.put("id", product.getId());
         pageVariables.put("name", product.getName());
         pageVariables.put("price", product.getPrice());
@@ -42,13 +43,13 @@ public class ItemServlet extends HttpServlet {
         product.setId(id);
         product.setName(req.getParameter("name"));
         product.setPrice(new BigDecimal(req.getParameter("price")));
-        productDao.update(id, product);
+        service.updateOne(id, product);
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
-        productDao.delete(id);
+        service.delete(id);
     }
 
     private static Map<String, Object> createPageVariablesMap(HttpServletRequest request) {

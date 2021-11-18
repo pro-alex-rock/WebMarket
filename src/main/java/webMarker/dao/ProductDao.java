@@ -93,7 +93,7 @@ public class ProductDao implements DaoResource {
     }
 
     @Override
-    public void update(int id, Product product) {
+    public void updateOne(int id, Product product) {
         try(PreparedStatement statement = dataSource.getPrepareStatement("UPDATE products SET name = ?, price = ? WHERE id = ?")) {
             statement.setString(1, product.getName());
             statement.setBigDecimal(2, product.getPrice());

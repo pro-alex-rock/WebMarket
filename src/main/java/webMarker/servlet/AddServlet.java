@@ -1,11 +1,13 @@
-package webMarker.servlets;
+package webMarker.servlet;
 
+import webMarker.configuration.ServiceFactory;
 import webMarker.dao.DaoResource;
 import webMarker.dao.DataSource;
 import webMarker.dao.PostgresSource;
 import webMarker.model.Product;
-import webMarker.service.PageGenerator;
-import webMarker.service.ProductDaoFactory;
+import webMarker.configuration.PageGenerator;
+import webMarker.configuration.ProductDaoFactory;
+import webMarker.service.Service;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,8 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AddServlet extends HttpServlet {
-    private final DataSource dataSource = new PostgresSource();
-    private final DaoResource productDao = ProductDaoFactory.getInstance(dataSource);
+    private final Service service = ServiceFactory.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -40,7 +41,7 @@ public class AddServlet extends HttpServlet {
         product.setId(id);
         product.setName(req.getParameter("name"));
         product.setPrice(new BigDecimal(req.getParameter("price")));
-        productDao.create(product);
+        service.create(product);
         Map<String, Object> pageVariables = createPageVariablesMap(req);
         String message = req.getParameter("message");
         pageVariables.put("message", message == null ? "" : message);

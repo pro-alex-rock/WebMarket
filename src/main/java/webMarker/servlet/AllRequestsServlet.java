@@ -1,7 +1,7 @@
-package webMarker.servlets;
+package webMarker.servlet;
 
 
-import webMarker.service.PageGenerator;
+import webMarker.configuration.PageGenerator;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
