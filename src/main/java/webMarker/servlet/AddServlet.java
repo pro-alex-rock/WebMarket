@@ -37,18 +37,10 @@ public class AddServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Product product = new Product();
-        int id = Integer.parseInt(req.getParameter("id"));
-        product.setId(id);
         product.setName(req.getParameter("name"));
         product.setPrice(new BigDecimal(req.getParameter("price")));
         service.create(product);
-        Map<String, Object> pageVariables = createPageVariablesMap(req);
-        String message = req.getParameter("message");
-        pageVariables.put("message", message == null ? "" : message);
-        resp.setContentType("text/html;charset=utf-8");
-        String page = PageGenerator.instance().getPage("add.html", pageVariables);
-        resp.getWriter().println(page);
-        resp.setStatus(HttpServletResponse.SC_OK);
+        resp.sendRedirect(req.getContextPath() + "/products");
     }
 
     private static Map<String, Object> createPageVariablesMap(HttpServletRequest request) {

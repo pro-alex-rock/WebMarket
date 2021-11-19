@@ -1,16 +1,22 @@
-.products{
+.products {
     background-color: aqua;
     font-style: italic;
     padding: 2%;
 }
-.input-product{
+.input_product.tableName {
+    width: 30%;
+    min-width: 30%;
+    max-width: 40%;
+    background-color: #F0FFFF;
+    border: solid 	#F0F8FF;
     display: block;
     align-self: center;
     align-items: center;
-    background-color: #F0FFFF;
-    border: solid 	#F0F8FF;
-    margin: auto;
+    margin: 15px;
     padding: 2%;
-    width:25%;
     height:300px;
+}
+
+.btn-primary {
+    margin-top:5px;
 }
