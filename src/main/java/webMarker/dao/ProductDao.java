@@ -42,7 +42,7 @@ public class ProductDao implements DaoResource {
             throw new RuntimeException("Inserted incorrect id.");
         }
         Product product = new Product();
-        try(PreparedStatement statement = dataSource.getPrepareStatement("SELECT * FROM products WHERE id=?")) {
+        try(PreparedStatement statement = dataSource.getPrepareStatement("SELECT name, price FROM products WHERE id=?")) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             resultSet.next();
@@ -62,7 +62,7 @@ public class ProductDao implements DaoResource {
     @Override
     public List<Product> selectAll() {
         List<Product> products = new ArrayList<>();
-        try(PreparedStatement statement = dataSource.getPrepareStatement("SELECT * FROM products");
+        try(PreparedStatement statement = dataSource.getPrepareStatement("SELECT id, name, price FROM products");
             ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {
                 Product product = new Product();
@@ -98,6 +98,7 @@ public class ProductDao implements DaoResource {
         try(PreparedStatement statement = dataSource.getPrepareStatement("UPDATE products SET name = ?, price = ? WHERE id = ?")) {
             statement.setString(1, product.getName());
             statement.setBigDecimal(2, product.getPrice());
+            statement.setInt(3, product.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
             logger.info("Couldn`t update by id: {} - {}", id, product);

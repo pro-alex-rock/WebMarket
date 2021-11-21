@@ -1,12 +1,8 @@
 package webMarker.servlet;
 
-import webMarker.configuration.ServiceFactory;
-import webMarker.dao.DaoResource;
-import webMarker.dao.DataSource;
-import webMarker.dao.PostgresSource;
-import webMarker.model.Product;
 import webMarker.configuration.PageGenerator;
-import webMarker.configuration.ProductDaoFactory;
+import webMarker.configuration.ServiceFactory;
+import webMarker.model.Product;
 import webMarker.service.Service;
 
 import javax.servlet.ServletException;
@@ -18,20 +14,20 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ItemServlet extends HttpServlet {
+public class EditServlet extends HttpServlet {
     private final Service service = ServiceFactory.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Map<String, Object> pageVariables = createPageVariablesMap(req);
         pageVariables.put("message", "");
-        Product product = service.selectOne(Integer.parseInt(req.getParameter("id")));
-        pageVariables.put("id", product.getId());
-        pageVariables.put("name", product.getName());
-        pageVariables.put("price", product.getPrice());
+        String url = req.getRequestURI();
+        int id = getIdFromPath(url);
+        Product product = service.selectOne(id);
+        pageVariables.put("product", product);
 
         resp.setContentType("text/html;charset=utf-8");
-        String page = PageGenerator.instance().getPage("product.html", pageVariables);
+        String page = PageGenerator.instance().getPage("edit.ftl", pageVariables);
         resp.getWriter().println(page);
         resp.setStatus(HttpServletResponse.SC_OK);
     }
@@ -39,17 +35,18 @@ public class ItemServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Product product = new Product();
-        int id = Integer.parseInt(req.getParameter("id"));
+        String url = req.getRequestURI();
+        int id = getIdFromPath(url);
         product.setId(id);
         product.setName(req.getParameter("name"));
         product.setPrice(new BigDecimal(req.getParameter("price")));
         service.updateOne(id, product);
+        resp.sendRedirect(req.getContextPath() + "/products");
     }
 
-    @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int id = Integer.parseInt(req.getParameter("id"));
-        service.delete(id);
+    private int getIdFromPath(String url) {
+        String id = url.substring(url.lastIndexOf('/') + 1);
+        return Integer.parseInt(id);
     }
 
     private static Map<String, Object> createPageVariablesMap(HttpServletRequest request) {

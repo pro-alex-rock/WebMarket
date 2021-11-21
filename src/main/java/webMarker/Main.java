@@ -16,10 +16,10 @@ public class Main {
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.addServlet(new ServletHolder(new HomeServlet()), "/");
         context.addServlet(new ServletHolder(new ProductsServlet()), "/products");
-        context.addServlet(new ServletHolder(new ItemServlet()), "/product");
+        context.addServlet(new ServletHolder(new EditServlet()), "/product");
         context.addServlet(new ServletHolder(new AddServlet()), "/products/add");
-        context.addServlet(new ServletHolder(new ItemServlet()), "/products/edit");
-        context.addServlet(new ServletHolder(new DeleteServlet()), "/products/delete");
+        context.addServlet(new ServletHolder(new EditServlet()), "/products/edit/*");
+        context.addServlet(new ServletHolder(new DeleteServlet()), "/products/delete/*");
 
         Server server = new Server(8090);
         server.setHandler(context);

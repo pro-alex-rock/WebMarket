@@ -1,12 +1,8 @@
 package webMarker.servlet;
 
-import webMarker.configuration.ServiceFactory;
-import webMarker.dao.DaoResource;
-import webMarker.dao.DataSource;
-import webMarker.dao.PostgresSource;
-import webMarker.model.Product;
 import webMarker.configuration.PageGenerator;
-import webMarker.configuration.ProductDaoFactory;
+import webMarker.configuration.ServiceFactory;
+import webMarker.model.Product;
 import webMarker.service.Service;
 
 import javax.servlet.ServletException;
@@ -29,7 +25,7 @@ public class ProductsServlet extends HttpServlet {
         pageVariables.put("products", products);
 
         resp.setContentType("text/html;charset=utf-8");
-        String page = PageGenerator.instance().getPage("products.html", pageVariables);
+        String page = PageGenerator.instance().getPage("products.ftl", pageVariables);
         resp.getWriter().println(page);
         resp.setStatus(HttpServletResponse.SC_OK);
     }
