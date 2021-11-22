@@ -6,6 +6,7 @@ import webMarker.model.Product;
 import webMarker.service.Service;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,15 +20,28 @@ public class ProductsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Map<String, Object> pageVariables = createPageVariablesMap(req);
-        pageVariables.put("message", "");
-        List<Product> products = service.selectAll();
-        pageVariables.put("products", products);
+        boolean isAuth = false;
+        Cookie[] cookies = req.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("user-token")) {
+                    isAuth = true;
+                }
+            }
+        }
+        if (isAuth) {
+            Map<String, Object> pageVariables = createPageVariablesMap(req);
+            pageVariables.put("message", "");
+            List<Product> products = service.selectAll();
+            pageVariables.put("products", products);
 
-        resp.setContentType("text/html;charset=utf-8");
-        String page = PageGenerator.instance().getPage("products.ftl", pageVariables);
-        resp.getWriter().println(page);
-        resp.setStatus(HttpServletResponse.SC_OK);
+            resp.setContentType("text/html;charset=utf-8");
+            String page = PageGenerator.instance().getPage("products.ftl", pageVariables);
+            resp.setStatus(HttpServletResponse.SC_OK);
+            resp.getWriter().println(page);
+        } else {
+            resp.sendRedirect("/login");
+        }
     }
 
     private static Map<String, Object> createPageVariablesMap(HttpServletRequest request) {

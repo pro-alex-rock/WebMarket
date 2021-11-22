@@ -20,7 +20,7 @@ public class ProductDao implements DaoResource {
         id = getLastId();
     }
 
-    private int getLastId() {
+    public int getLastId() {
         try(PreparedStatement statement = dataSource.getPrepareStatement("SELECT MAX(id) as id FROM products;");
             ResultSet resultSet = statement.executeQuery()) {
             resultSet.next();

@@ -20,10 +20,10 @@ public class Main {
         context.addServlet(new ServletHolder(new AddServlet()), "/products/add");
         context.addServlet(new ServletHolder(new EditServlet()), "/products/edit/*");
         context.addServlet(new ServletHolder(new DeleteServlet()), "/products/delete/*");
+        context.addServlet(new ServletHolder(new LoginServlet()), "/login");
 
-        Server server = new Server(8090);
+        Server server = new Server(8080);
         server.setHandler(context);
-
         server.start();
     }
 }
