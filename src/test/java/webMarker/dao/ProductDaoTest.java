@@ -1,42 +1,50 @@
 package webMarker.dao;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
+import webMarker.model.Product;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class ProductDaoTest {
-    @Mock
-    DaoResource mockProductDao;
-    @Mock
-    DataSource mockPostgresSource;
-    @Mock
-    Connection mockConnection;
-    @Mock
-    PreparedStatement mockPreparedStmnt;
-    @Mock
-    ResultSet mockResultSet;
-    int productId = 10;
+
+    PostgresSource mockPostgresSource = mock(PostgresSource.class);
+
+    DaoResource productDao;
+
+    Connection mockConnection = mock(Connection.class);
+    PreparedStatement mockPreparedStmnt = mock(PreparedStatement.class);
+    ResultSet mockResultSet = mock(ResultSet.class);
     String query;
 
     @BeforeEach
     public void setUp() throws SQLException {
         when(mockPostgresSource.getConnection()).thenReturn(mockConnection);
-        when(mockPostgresSource.getPrepareStatement(query)).thenReturn(mockPreparedStmnt);
+        productDao = new ProductDao(mockPostgresSource);
     }
 
 
     @Test
-    public void ddd() throws SQLException {
-        query = "SELECT * FROM products WHERE id=?";
-        when(mockPostgresSource.getConnection()).thenReturn(mockConnection);
-        when(mockPostgresSource.getPrepareStatement(query)).thenReturn(mockPreparedStmnt);
+    public void shouldCompareProductsAndTrue() throws SQLException {
+        when(mockPostgresSource.getPrepareStatement("SELECT name, price FROM products WHERE id=?")).thenReturn(mockPreparedStmnt);
+        when(mockPreparedStmnt.executeQuery()).thenReturn(mockResultSet);
+        when(mockResultSet.getInt("id")).thenReturn(1);
+        when(mockResultSet.getString("name")).thenReturn("Test");
+        when(mockResultSet.getBigDecimal("price")).thenReturn(new BigDecimal(10));
+        Product expectedProduct = new Product();
+        expectedProduct.setId(1);
+        expectedProduct.setName("Test");
+        expectedProduct.setPrice(new BigDecimal(10));
+        Product actualProduct = productDao.selectOne(1);
+        Assertions.assertEquals(expectedProduct, actualProduct);
     }
 
 }
