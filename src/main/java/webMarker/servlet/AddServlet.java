@@ -19,7 +19,7 @@ public class AddServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Map<String, Object> pageVariables = createPageVariablesMap(req);
+        Map<String, Object> pageVariables = new HashMap<>();
         String message = req.getParameter("message");
         pageVariables.put("message", message == null ? "" : message);
         resp.setContentType("text/html;charset=utf-8");
@@ -35,15 +35,5 @@ public class AddServlet extends HttpServlet {
         product.setPrice(new BigDecimal(req.getParameter("price")));
         service.create(product);
         resp.sendRedirect(req.getContextPath() + "/products");
-    }
-
-    private static Map<String, Object> createPageVariablesMap(HttpServletRequest request) {
-        Map<String, Object> pageVariables = new HashMap<>();
-        pageVariables.put("method", request.getMethod());
-        pageVariables.put("URL", request.getRequestURL().toString());
-        pageVariables.put("pathInfo", request.getPathInfo());
-        pageVariables.put("sessionId", request.getSession().getId());
-        pageVariables.put("parameters", request.getParameterMap().toString());
-        return pageVariables;
     }
 }

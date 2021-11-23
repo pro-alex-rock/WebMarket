@@ -30,7 +30,7 @@ public class ProductsServlet extends HttpServlet {
             }
         }
         if (isAuth) {
-            Map<String, Object> pageVariables = createPageVariablesMap(req);
+            Map<String, Object> pageVariables = new HashMap<>();
             pageVariables.put("message", "");
             List<Product> products = service.selectAll();
             pageVariables.put("products", products);
@@ -42,15 +42,5 @@ public class ProductsServlet extends HttpServlet {
         } else {
             resp.sendRedirect("/login");
         }
-    }
-
-    private static Map<String, Object> createPageVariablesMap(HttpServletRequest request) {
-        Map<String, Object> pageVariables = new HashMap<>();
-        pageVariables.put("method", request.getMethod());
-        pageVariables.put("URL", request.getRequestURL().toString());
-        pageVariables.put("pathInfo", request.getPathInfo());
-        pageVariables.put("sessionId", request.getSession().getId());
-        pageVariables.put("parameters", request.getParameterMap().toString());
-        return pageVariables;
     }
 }

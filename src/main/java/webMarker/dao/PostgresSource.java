@@ -18,12 +18,6 @@ public class PostgresSource implements DataSource {
     @Override
     public Connection getConnection() {
         try {
-            Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException("Couldn`t download postgres driver.", e);
-        }
-
-        try {
             return DriverManager.getConnection(URL, USERNAME, PASSWORD);
         } catch (SQLException e) {
             throw new RuntimeException("Couldn`t connect to postgres db.", e);

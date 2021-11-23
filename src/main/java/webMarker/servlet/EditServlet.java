@@ -19,7 +19,7 @@ public class EditServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Map<String, Object> pageVariables = createPageVariablesMap(req);
+        Map<String, Object> pageVariables = new HashMap<>();
         pageVariables.put("message", "");
         String url = req.getRequestURI();
         int id = getIdFromPath(url);
@@ -47,15 +47,5 @@ public class EditServlet extends HttpServlet {
     private int getIdFromPath(String url) {
         String id = url.substring(url.lastIndexOf('/') + 1);
         return Integer.parseInt(id);
-    }
-
-    private static Map<String, Object> createPageVariablesMap(HttpServletRequest request) {
-        Map<String, Object> pageVariables = new HashMap<>();
-        pageVariables.put("method", request.getMethod());
-        pageVariables.put("URL", request.getRequestURL().toString());
-        pageVariables.put("pathInfo", request.getPathInfo());
-        pageVariables.put("sessionId", request.getSession().getId());
-        pageVariables.put("parameters", request.getParameterMap().toString());
-        return pageVariables;
     }
 }
