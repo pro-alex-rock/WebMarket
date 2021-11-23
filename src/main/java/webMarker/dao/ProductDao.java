@@ -2,6 +2,7 @@ package webMarker.dao;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import webMarker.dao.source.DataSource;
 import webMarker.model.Product;
 
 import java.sql.PreparedStatement;
@@ -10,29 +11,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductDao implements DaoResource {
+
+public class ProductDao implements DaoResource<Product> {
     private static final Logger logger = LoggerFactory.getLogger(ProductDao.class);
     private final DataSource dataSource;
-    private int id;
 
     public ProductDao(DataSource postgresSource) {
         this.dataSource = postgresSource;
-        id = getLastId();
-    }
-
-    private int getLastId() {
-        try(PreparedStatement statement = dataSource.getPrepareStatement("SELECT MAX(id) as id FROM products;");
-            ResultSet resultSet = statement.executeQuery()) {
-            resultSet.next();
-            try {
-                id = resultSet.getInt("id");
-            } catch (Exception e) {
-                id = 1;
-            }
-            return id;
-        } catch (SQLException e) {
-            throw new RuntimeException("Couldn`t connect to db", e);
-        }
     }
 
     @Override
@@ -81,10 +66,9 @@ public class ProductDao implements DaoResource {
 
     @Override
     public void create(Product product) {
-        try(PreparedStatement statement = dataSource.getPrepareStatement("INSERT INTO products VALUES (?, ?, ?)")) {
-            statement.setInt(1, ++id);
-            statement.setString(2, product.getName());
-            statement.setBigDecimal(3, product.getPrice());
+        try(PreparedStatement statement = dataSource.getPrepareStatement("INSERT INTO products (name, price) VALUES (?, ?)")) {
+            statement.setString(1, product.getName());
+            statement.setBigDecimal(2, product.getPrice());
             statement.executeUpdate();
         } catch (SQLException e) {
             logger.info("Couldn`t create new Product.");
@@ -112,7 +96,6 @@ public class ProductDao implements DaoResource {
         try(PreparedStatement statement = dataSource.getPrepareStatement("DELETE FROM products WHERE id = ?")) {
             statement.setInt(1, id);
             statement.executeUpdate();
-            --id;
         } catch (SQLException e) {
             logger.info("Couldn`t delete by id: {}", id);
             throw new RuntimeException("Couldn`t delete by id: " + id, e);

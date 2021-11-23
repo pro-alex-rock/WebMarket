@@ -8,8 +8,8 @@
 
     <property name="LOG_FILE" value="Main"/>
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <!--<file>${LOG_FILE}.log</file>-->
-        <file>logs/test.log</file>
+        <file>logs/${LOG_FILE}.log</file>
+        <!--<file>logs/test.log</file>-->
         <append>true</append>
         <encoder>
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
@@ -17,6 +17,7 @@
     </appender>
 
     <logger name="logs" level="INFO"/>
+    <logger name="org.eclipse.jetty" level="WARN" />
 
     <root level="INFO">
         <appender-ref ref="STDOUT" />

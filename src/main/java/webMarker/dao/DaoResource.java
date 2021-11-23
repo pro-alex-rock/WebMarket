@@ -4,14 +4,14 @@ import webMarker.model.Product;
 
 import java.util.List;
 
-public interface DaoResource {
+public interface DaoResource<T> {
     Product selectOne(int id);
 
-    List<Product> selectAll();
+    List<T> selectAll();
 
-    void create(Product product);
+    void create(T t);
 
-    void updateOne(int id, Product product);
+    void updateOne(int id, T t);
 
     void delete(int id);
 }

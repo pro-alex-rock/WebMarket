@@ -2,7 +2,7 @@ package webMarker.service;
 
 import webMarker.configuration.ProductDaoFactory;
 import webMarker.dao.DaoResource;
-import webMarker.dao.PostgresSource;
+import webMarker.dao.source.PostgresSource;
 import webMarker.model.Product;
 
 import java.util.List;

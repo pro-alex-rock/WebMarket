@@ -1,7 +1,7 @@
 package webMarker.configuration;
 
 import webMarker.dao.DaoResource;
-import webMarker.dao.DataSource;
+import webMarker.dao.source.DataSource;
 import webMarker.dao.ProductDao;
 
 public class ProductDaoFactory {

@@ -1,4 +1,6 @@
-package webMarker.dao;
+package webMarker.dao.source;
+
+import webMarker.dao.source.DataSource;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

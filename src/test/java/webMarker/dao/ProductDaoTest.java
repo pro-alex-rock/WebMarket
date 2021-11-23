@@ -3,6 +3,7 @@ package webMarker.dao;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import webMarker.dao.source.PostgresSource;
 import webMarker.model.Product;
 
 import java.math.BigDecimal;
