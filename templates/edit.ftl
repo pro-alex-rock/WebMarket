@@ -51,11 +51,15 @@
                     <form action="/products/edit/${product.id}" method="post">
                         <div>
                             <label for="name" class="form-label">Name:</label>
-                            <input type="text" name="name" class="form-control" id="name">
+                            <input type="text" name="name" class="form-control" id="name" alt="${product.name}">
                         </div>
                         <div>
                             <label for="price" class="form-label">Price:</label>
-                            <input type="text" name="price" class="form-control" id="price">
+                            <input type="text" name="price" class="form-control" id="price" alt="${product.price}">
+                        </div>
+                        <div>
+                            <label for="description" class="form-label">Description:</label>
+                            <input type="text" name="description" class="form-control" id="description">
                         </div>
                         <div a href="/products" style="margin-top: 20px">
                             <button type="submit" class="btn btn-primary w-100">Update</button>

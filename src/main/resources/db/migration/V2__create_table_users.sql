@@ -5,3 +5,6 @@ CREATE TABLE users
     password VARCHAR(250) NOT NULL,
     sole VARCHAR(250) NOT NULL
 );
+
+ALTER TABLE products
+ADD COLUMN description VARCHAR(1024);

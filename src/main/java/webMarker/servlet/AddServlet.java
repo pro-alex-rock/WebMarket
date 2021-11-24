@@ -33,6 +33,7 @@ public class AddServlet extends HttpServlet {
         Product product = new Product();
         product.setName(req.getParameter("name"));
         product.setPrice(new BigDecimal(req.getParameter("price")));
+        product.setDescription(req.getParameter("description"));
         service.create(product);
         resp.sendRedirect(req.getContextPath() + "/products");
     }

@@ -2,7 +2,6 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/style.css" type="text/css">
@@ -56,6 +55,7 @@
                 <th scope="col">id</th>
                 <th scope="col">Name</th>
                 <th scope="col">Price</th>
+                <th scope="col">Description</th>
                 <th scope="col">Handle</th>
                 <th scope="col">Handle</th>
             </tr>
@@ -67,6 +67,7 @@
                     <th>${product.id}</th><br>
                     <td>${product.name}</td><br>
                     <td>${product.price}</td><br>
+                    <td>${product.description}</td><br>
                     <td>
                         <a class="btn btn-danger btn-lg" href="/products/edit/${product.id}" role="button">Update</a>
                     </td>

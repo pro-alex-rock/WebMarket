@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
@@ -56,6 +55,10 @@
                     <div>
                         <label for="price" class="form-label">Price:</label>
                         <input type="text" name="price" class="form-control" id="price">
+                    </div>
+                    <div>
+                        <label for="description" class="form-label">Description:</label>
+                        <input type="text" name="description" class="form-control" id="description">
                     </div>
                     <div a href="/products" style="margin-top: 20px">
                     <button type="submit" class="btn btn-primary w-100">Add</button>

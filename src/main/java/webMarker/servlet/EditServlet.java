@@ -40,6 +40,7 @@ public class EditServlet extends HttpServlet {
         product.setId(id);
         product.setName(req.getParameter("name"));
         product.setPrice(new BigDecimal(req.getParameter("price")));
+        product.setDescription(req.getParameter("description"));
         service.updateOne(id, product);
         resp.sendRedirect(req.getContextPath() + "/products");
     }

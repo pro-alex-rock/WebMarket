@@ -1,4 +1,4 @@
-DROP TABLE products IF EXISTS;
+DROP TABLE IF EXISTS products;
 
 create table products (
                           id SERIAL primary key,
@@ -9,4 +9,5 @@ CREATE SEQUENCE table_id_seq;
 ALTER TABLE products
     ALTER COLUMN id
         SET DEFAULT NEXTVAL('table_id_seq');
-INSERT INTO products VALUES ('IPhone', 1200);
+INSERT INTO products (name, price) VALUES ('IPhone', 1200);
+
