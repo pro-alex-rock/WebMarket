@@ -3,7 +3,7 @@ package webMarker.servlet;
 import webMarker.configuration.PageGenerator;
 import webMarker.configuration.ServiceFactory;
 import webMarker.model.Product;
-import webMarker.service.Service;
+import webMarker.service.ProductService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ProductsServlet extends HttpServlet {
-    private final Service service = ServiceFactory.getInstance();
+    private final ProductService productService = ServiceFactory.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -32,7 +32,7 @@ public class ProductsServlet extends HttpServlet {
         if (isAuth) {
             Map<String, Object> pageVariables = new HashMap<>();
             pageVariables.put("message", "");
-            List<Product> products = service.selectAll();
+            List<Product> products = productService.selectAll();
             pageVariables.put("products", products);
 
             resp.setContentType("text/html;charset=utf-8");

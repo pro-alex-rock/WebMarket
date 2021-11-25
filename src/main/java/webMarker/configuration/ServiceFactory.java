@@ -1,18 +1,18 @@
 package webMarker.configuration;
 
-import webMarker.service.Service;
+import webMarker.service.ProductService;
 
 public class ServiceFactory {
-    private static Service service;
+    private static ProductService productService;
 
-    public static Service getInstance() {
-        if (service == null) {
-            service = new Service();
+    public static ProductService getInstance() {
+        if (productService == null) {
+            productService = new ProductService();
         }
-        return service;
+        return productService;
     }
 
     private ServiceFactory() {
-        service = new Service();
+        productService = new ProductService();
     }
 }

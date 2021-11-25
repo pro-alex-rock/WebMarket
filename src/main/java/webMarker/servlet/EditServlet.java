@@ -3,7 +3,7 @@ package webMarker.servlet;
 import webMarker.configuration.PageGenerator;
 import webMarker.configuration.ServiceFactory;
 import webMarker.model.Product;
-import webMarker.service.Service;
+import webMarker.service.ProductService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EditServlet extends HttpServlet {
-    private final Service service = ServiceFactory.getInstance();
+    private final ProductService productService = ServiceFactory.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -23,7 +23,7 @@ public class EditServlet extends HttpServlet {
         pageVariables.put("message", "");
         String url = req.getRequestURI();
         int id = getIdFromPath(url);
-        Product product = service.selectOne(id);
+        Product product = productService.selectOne(id);
         pageVariables.put("product", product);
 
         resp.setContentType("text/html;charset=utf-8");
@@ -41,8 +41,8 @@ public class EditServlet extends HttpServlet {
         product.setName(req.getParameter("name"));
         product.setPrice(new BigDecimal(req.getParameter("price")));
         product.setDescription(req.getParameter("description"));
-        service.updateOne(id, product);
-        resp.sendRedirect(req.getContextPath() + "/products");
+        productService.updateOne(id, product);
+        resp.sendRedirect("/products");
     }
 
     private int getIdFromPath(String url) {

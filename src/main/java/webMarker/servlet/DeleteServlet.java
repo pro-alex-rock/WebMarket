@@ -1,7 +1,7 @@
 package webMarker.servlet;
 
 import webMarker.configuration.ServiceFactory;
-import webMarker.service.Service;
+import webMarker.service.ProductService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,14 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class DeleteServlet extends HttpServlet {
-    private final Service service = ServiceFactory.getInstance();
+    private final ProductService productService = ServiceFactory.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String url = req.getRequestURI();
         int id = getIdFromPath(url);
-        service.delete(id);
-        resp.sendRedirect(req.getContextPath() + "/products");
+        productService.delete(id);
+        resp.sendRedirect("/products");
     }
 
     private int getIdFromPath(String url) {

@@ -7,7 +7,7 @@ import webMarker.model.Product;
 
 import java.util.List;
 
-public class Service {
+public class ProductService {
     private final DaoResource productDao = ProductDaoFactory.getInstance(new PostgresSource());
 
     public Product selectOne(int id) {
