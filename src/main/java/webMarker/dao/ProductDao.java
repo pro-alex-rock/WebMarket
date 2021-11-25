@@ -102,8 +102,8 @@ public class ProductDao implements DaoResource<Product> {
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
-            logger.info("Couldn`t delete by id: {}" + e, id);
-            throw new RuntimeException("Couldn`t delete by id: " + id, e);
+            logger.info("Couldn`t delete product by id: {}" + e, id);
+            throw new RuntimeException("Couldn`t delete product by id: " + id, e);
         }
         logger.info("The product with id: {} deleted", id);
     }

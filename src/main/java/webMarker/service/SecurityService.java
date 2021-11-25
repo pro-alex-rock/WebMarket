@@ -1,10 +1,10 @@
-package webMarker.model;
+package webMarker.service;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
 import java.util.UUID;
 
-public class Credentials {
+public class SecurityService {
 
     public String getPasswordEncode(String login, String password) {
         String sole = UUID.randomUUID().toString();

@@ -2,6 +2,7 @@ package webMarker.configuration;
 
 import webMarker.dao.DaoResource;
 import webMarker.dao.ProductDao;
+import webMarker.dao.UserDao;
 import webMarker.dao.source.DataSource;
 
 public class UserDaoFactory {
@@ -9,7 +10,7 @@ public class UserDaoFactory {
 
     public static DaoResource getInstance(DataSource dataSource) {
         if (userDao == null) {
-            userDao = new ProductDao(dataSource);
+            userDao = new UserDao(dataSource);
         }
         return userDao;
     }

@@ -11,7 +11,7 @@ public class ProductService {
     private final DaoResource productDao = ProductDaoFactory.getInstance(new PostgresSource());
 
     public Product selectOne(int id) {
-        return productDao.selectOne(id);
+        return (Product) productDao.selectOne(id);
     }
 
     public List<Product> selectAll() {

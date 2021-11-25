@@ -21,6 +21,7 @@ public class Main {
         context.addServlet(new ServletHolder(new EditServlet()), "/products/edit/*");
         context.addServlet(new ServletHolder(new DeleteServlet()), "/products/delete/*");
         context.addServlet(new ServletHolder(new LoginServlet()), "/login");
+        context.addServlet(new ServletHolder(new RegisterServlet()), "/registration");
 
         Server server = new Server(8080);
         server.setHandler(context);

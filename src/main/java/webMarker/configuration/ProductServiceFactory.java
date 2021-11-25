@@ -2,7 +2,7 @@ package webMarker.configuration;
 
 import webMarker.service.ProductService;
 
-public class ServiceFactory {
+public class ProductServiceFactory {
     private static ProductService productService;
 
     public static ProductService getInstance() {
@@ -12,7 +12,7 @@ public class ServiceFactory {
         return productService;
     }
 
-    private ServiceFactory() {
+    private ProductServiceFactory() {
         productService = new ProductService();
     }
 }

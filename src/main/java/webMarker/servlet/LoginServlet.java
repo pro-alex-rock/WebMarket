@@ -1,10 +1,8 @@
 package webMarker.servlet;
 
-import org.apache.commons.codec.digest.DigestUtils;
 import webMarker.configuration.PageGenerator;
-import webMarker.configuration.ServiceFactory;
-import webMarker.model.Credentials;
-import webMarker.model.User;
+import webMarker.configuration.ProductServiceFactory;
+import webMarker.configuration.UserServiceFactory;
 import webMarker.service.ProductService;
 import webMarker.service.UserService;
 
@@ -19,8 +17,7 @@ import java.util.Map;
 import java.util.UUID;
 
 public class LoginServlet extends HttpServlet {
-    private final ProductService productService = ServiceFactory.getInstance();
-    private final UserService userService = new UserService();
+    private final UserService userService = UserServiceFactory.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -40,22 +37,11 @@ public class LoginServlet extends HttpServlet {
         String token = UUID.randomUUID().toString();
         Cookie cookie = new Cookie("user-token", token);
         resp.addCookie(cookie);
+
+        if (userService.isExistUser(login, password)) {
         resp.sendRedirect("/products");
-
-        Credentials credentials = new Credentials(login, password);
-
-        String sole = UUID.randomUUID().toString();
-        String passwordEncode = DigestUtils.md5Hex(password + sole);
-        User user = new User();
-        user.setName(login);
-        user.setPassword(passwordEncode);
-        user.setSole(sole);
-        userService.create(user);
-
-        /*Product product = new Product();
-        product.setName(req.getParameter("name"));
-        product.setPrice(new BigDecimal(req.getParameter("price")));
-        service.create(product);
-        resp.sendRedirect(req.getContextPath() + "/products");*/
+        } else {
+            resp.sendRedirect("/registration");
+        }
     }
 }

@@ -5,7 +5,7 @@ import webMarker.model.Product;
 import java.util.List;
 
 public interface DaoResource<T> {
-    Product selectOne(int id);
+    T selectOne(int id);
 
     List<T> selectAll();
 
