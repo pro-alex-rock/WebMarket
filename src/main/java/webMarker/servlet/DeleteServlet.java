@@ -1,7 +1,7 @@
 package webMarker.servlet;
 
 import webMarker.configuration.ProductServiceFactory;
-import webMarker.service.ProductService;
+import webMarker.service.DefaultService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class DeleteServlet extends HttpServlet {
-    private final ProductService productService = ProductServiceFactory.getInstance();
+    private final DefaultService productService = ProductServiceFactory.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

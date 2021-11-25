@@ -1,8 +1,8 @@
-package webMarker.dao;
+package webMarker.service;
 
 import java.util.List;
 
-public interface DaoResource<T> {
+public interface DefaultService<T> {
     T selectOne(int id);
 
     List<T> selectAll();

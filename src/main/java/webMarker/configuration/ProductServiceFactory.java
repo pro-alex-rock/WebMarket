@@ -1,11 +1,12 @@
 package webMarker.configuration;
 
+import webMarker.service.DefaultService;
 import webMarker.service.ProductService;
 
 public class ProductServiceFactory {
-    private static ProductService productService;
+    private static DefaultService productService;
 
-    public static ProductService getInstance() {
+    public static DefaultService getInstance() {
         if (productService == null) {
             productService = new ProductService();
         }

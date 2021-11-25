@@ -3,7 +3,7 @@ package webMarker.servlet;
 import webMarker.configuration.PageGenerator;
 import webMarker.configuration.ProductServiceFactory;
 import webMarker.model.Product;
-import webMarker.service.ProductService;
+import webMarker.service.DefaultService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AddServlet extends HttpServlet {
-    private final ProductService productService = ProductServiceFactory.getInstance();
+    private final DefaultService productService = ProductServiceFactory.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
