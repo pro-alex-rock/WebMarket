@@ -21,11 +21,8 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Map<String, Object> pageVariables = new HashMap<>();
-        String message = req.getParameter("message");
-        pageVariables.put("message", message == null ? "" : message);
         resp.setContentType("text/html;charset=utf-8");
-        String page = PageGenerator.instance().getPage("login.ftl", pageVariables);
+        String page = PageGenerator.instance().getPage("login.ftl");
         resp.getWriter().println(page);
     }
 

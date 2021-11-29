@@ -2,9 +2,9 @@ package webMarker.dao;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import webMarker.dao.source.DataSource;
 import webMarker.model.User;
 
+import javax.sql.DataSource;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,16 +12,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class UserDao implements DaoResource<User>{
-    private static final Logger logger = LoggerFactory.getLogger(UserDao.class);
+public class JdbcUserDao implements DaoResource<User>{
+    private static final Logger logger = LoggerFactory.getLogger(JdbcUserDao.class);
     private final DataSource dataSource;
 
-    public UserDao(DataSource dataSource) {
+    public JdbcUserDao(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
     public Optional<User> getUser(String login, String passwordEncode) {
-        try(PreparedStatement statement = dataSource.getPrepareStatement("SELECT id, username, password FROM users WHERE (username = ? AND password = ?)")) {
+        try(PreparedStatement statement = dataSource.getConnection().prepareStatement("SELECT id, username, password FROM users WHERE (username = ? AND password = ?)")) {
             statement.setString(1, login);
             statement.setString(2, passwordEncode);
             ResultSet resultSet = statement.executeQuery();
@@ -49,7 +49,7 @@ public class UserDao implements DaoResource<User>{
             throw new RuntimeException("Inserted incorrect id.");
         }
         User user = new User();
-        try(PreparedStatement statement = dataSource.getPrepareStatement("SELECT username, password FROM users WHERE id=?")) {
+        try(PreparedStatement statement = dataSource.getConnection().prepareStatement("SELECT username, password FROM users WHERE id=?")) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             resultSet.next();
@@ -68,7 +68,7 @@ public class UserDao implements DaoResource<User>{
     @Override
     public List<User> selectAll() {
         List<User> users = new ArrayList<>();
-        try(PreparedStatement statement = dataSource.getPrepareStatement("SELECT id, username, password FROM users");
+        try(PreparedStatement statement = dataSource.getConnection().prepareStatement("SELECT id, username, password FROM users");
             ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {
                 User user = new User();
@@ -87,7 +87,7 @@ public class UserDao implements DaoResource<User>{
 
     @Override
     public void create(User user) {
-        try(PreparedStatement statement = dataSource.getPrepareStatement("INSERT INTO users (username, password) VALUES (?, ?)")) {
+        try(PreparedStatement statement = dataSource.getConnection().prepareStatement("INSERT INTO users (username, password) VALUES (?, ?)")) {
             statement.setString(1, user.getName());
             statement.setString(2, user.getPassword());
             statement.executeUpdate();
@@ -103,7 +103,7 @@ public class UserDao implements DaoResource<User>{
 
     @Override
     public void delete(int id) {
-        try(PreparedStatement statement = dataSource.getPrepareStatement("DELETE FROM users WHERE id = ?")) {
+        try(PreparedStatement statement = dataSource.getConnection().prepareStatement("DELETE FROM users WHERE id = ?")) {
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {

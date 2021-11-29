@@ -28,7 +28,6 @@ public class EditServlet extends HttpServlet {
 
         resp.setContentType("text/html;charset=utf-8");
         String page = PageGenerator.instance().getPage("edit.ftl", pageVariables);
-        resp.setStatus(HttpServletResponse.SC_OK);
         resp.getWriter().println(page);
     }
 
