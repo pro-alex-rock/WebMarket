@@ -31,10 +31,10 @@ public class LoginServlet extends HttpServlet {
         Cookie cookie = new Cookie("user-token", token);
         resp.addCookie(cookie);
 
-        if (userService.isExistUser(login, password)) {
+        /*if (userService.isExistUser(login, password)) {
             resp.sendRedirect("/products");
         } else {
             resp.sendRedirect("/registration");
-        }
+        }*/
     }
 }
