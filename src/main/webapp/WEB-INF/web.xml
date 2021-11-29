@@ -7,7 +7,7 @@
 
     <servlet>
         <servlet-name>HomeServlet</servlet-name>
-        <servlet-class>webMarker.servlet.HomeServlet</servlet-class>
+        <servlet-class>com.servlet.HomeServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
@@ -16,7 +16,7 @@
 
     <servlet>
         <servlet-name>ProductsServlet</servlet-name>
-        <servlet-class>webMarker.servlet.ProductsServlet</servlet-class>
+        <servlet-class>com.servlet.ProductsServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ProductsServlet</servlet-name>
@@ -25,7 +25,7 @@
 
     <servlet>
         <servlet-name>AddServlet</servlet-name>
-        <servlet-class>webMarker.servlet.AddServlet</servlet-class>
+        <servlet-class>com.servlet.AddServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AddServlet</servlet-name>
@@ -34,7 +34,7 @@
 
     <servlet>
         <servlet-name>DeleteServlet</servlet-name>
-        <servlet-class>webMarker.servlet.DeleteServlet</servlet-class>
+        <servlet-class>com.servlet.DeleteServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>DeleteServlet</servlet-name>
@@ -43,7 +43,7 @@
 
     <servlet>
         <servlet-name>EditServlet</servlet-name>
-        <servlet-class>webMarker.servlet.EditServlet</servlet-class>
+        <servlet-class>com.servlet.EditServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>EditServlet</servlet-name>
@@ -52,7 +52,7 @@
 
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>webMarker.servlet.LoginServlet</servlet-class>
+        <servlet-class>com.servlet.LoginServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -61,7 +61,7 @@
 
     <servlet>
         <servlet-name>RegisterServlet</servlet-name>
-        <servlet-class>webMarker.servlet.RegisterServlet</servlet-class>
+        <servlet-class>com.servlet.RegisterServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
