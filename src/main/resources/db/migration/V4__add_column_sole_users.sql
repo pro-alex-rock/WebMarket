@@ -1,0 +1,2 @@
+ALTER TABLE users
+    ADD COLUMN sole VARCHAR(1024);

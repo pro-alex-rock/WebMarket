@@ -6,6 +6,7 @@ public class User {
     private int id;
     private String name;
     private String password;
+    private String sole;
 
     public User() {
     }
@@ -38,6 +39,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getSole() {
+        return sole;
+    }
+
+    public void setSole(String sole) {
+        this.sole = sole;
     }
 
     @Override

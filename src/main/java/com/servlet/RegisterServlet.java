@@ -14,6 +14,7 @@ import java.io.IOException;
 
 public class RegisterServlet extends HttpServlet {
     private final UserService userService = UserServiceFactory.getInstance();
+    private final SecurityService securityService = new SecurityService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,17 +27,15 @@ public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
-        boolean isExistUser = userService.isExistUser(login, password);
-        if (isExistUser) {
-            resp.sendRedirect("/login");
-        } else {
+            String sole = securityService.getUUID();
+            String passwordEncoded = securityService.getPasswordEncode(password + sole);
+
             User user = new User();
             user.setName(login);
+            user.setPassword(passwordEncoded);
+            user.setSole(sole);
 
-            String pass = new SecurityService().getPasswordEncode(login, password);
-            user.setPassword(pass);
             userService.create(user);
             resp.sendRedirect("/products");
-        }
     }
 }

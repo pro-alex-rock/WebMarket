@@ -4,6 +4,7 @@ import com.configuration.UserServiceFactory;
 import com.service.UserService;
 
 import javax.servlet.*;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -14,17 +15,34 @@ public class UserFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        HttpServletRequest req = (HttpServletRequest) servletRequest;
-        HttpServletResponse res = (HttpServletResponse) servletResponse;
-        String login = req.getParameter("login");
-        String password = req.getParameter("password");
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
+        HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-        if (userService.isExistUser(login, password)) {
-            res.sendRedirect("/products");
+        boolean isAuth = false;
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : request.getCookies()) {
+                if (cookie.getName().equalsIgnoreCase("user-token")) {
+                    isAuth = true;
+                }
+            }
+        }
+
+        if (isAuth) {
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
-            res.sendRedirect(req.getContextPath() + "/registration");
+            response.sendRedirect("/login");
         }
+
+       /* String login = request.getParameter("login");
+        String password = request.getParameter("password");
+
+        if (userService.isExistUser(login, password)) {
+            response.sendRedirect("/products");
+            filterChain.doFilter(servletRequest, servletResponse);
+        } else {
+            response.sendRedirect(request.getContextPath() + "/registration");
+        }*/
     }
 
     @Override

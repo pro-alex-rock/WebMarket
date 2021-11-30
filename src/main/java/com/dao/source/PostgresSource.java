@@ -1,34 +1,30 @@
 package com.dao.source;
 
+import com.model.MyProperties;
+
 import javax.sql.DataSource;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
-import java.sql.*;
-import java.util.Properties;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.SQLFeatureNotSupportedException;
 import java.util.logging.Logger;
 
 public class PostgresSource implements DataSource {
-    private final Properties properties = new Properties();
+    private final MyProperties properties = new MyProperties();
 
     public Connection getConnection() {
         try {
             Class.forName("org.postgresql.Driver");
-            return DriverManager.getConnection(getProperty("postgres.url"), getProperty("postgres.user"), getProperty("postgres.password"));
+            return DriverManager.getConnection(properties.getProperty("postgres.url")
+                    , properties.getProperty("postgres.user")
+                    , properties.getProperty("postgres.password"));
+
         } catch (SQLException e) {
             throw new RuntimeException("Couldn`t open connection.", e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException("Couldn`t found jdbc Driver.", e);
-        } catch (IOException e) {
-            throw new RuntimeException("Absent needed property.", e);
         }
-    }
-
-    private String getProperty(String prop) throws IOException {
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        InputStream resourceAsStream = classLoader.getResourceAsStream("/application.properties");
-        properties.load(resourceAsStream);
-        return properties.getProperty(prop);
     }
 
     @Override

@@ -31,7 +31,7 @@ public class ProductsServlet extends HttpServlet {
         }
         if (isAuth) {
             Map<String, Object> pageVariables = new HashMap<>();
-            pageVariables.put("message", "");
+            //pageVariables.put("message", "");
             List<Product> products = productService.selectAll();
             pageVariables.put("products", products);
 

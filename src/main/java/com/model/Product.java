@@ -30,6 +30,9 @@ public class Product {
     }
 
     public void setPrice(BigDecimal price) {
+        if (price.compareTo(new BigDecimal(0)) <= 0) {
+            throw new IllegalArgumentException("The price can`t be less or equal to zero.");
+        }
         this.price = price;
     }
 
