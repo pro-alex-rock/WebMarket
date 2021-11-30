@@ -22,7 +22,7 @@ public class JdbcUserDao implements DaoResource<User>{
     }
 
     public Optional<User> getUser(String login, String passwordEncode) {
-        System.out.println(login + " ----- " + passwordEncode);
+        logger.info(login + " ----- " + passwordEncode); // debugging
         try(Connection connection = dataSource.getConnection();
                 PreparedStatement statement = connection.prepareStatement("SELECT id, username, password FROM users WHERE (username = ? AND password = ?)")) {
             statement.setString(1, login);

@@ -5,6 +5,15 @@
                       http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
+    <filter>
+        <filter-name>UserFilter</filter-name>
+        <filter-class>com.filter.UserFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>UserFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
     <servlet>
         <servlet-name>HomeServlet</servlet-name>
         <servlet-class>com.servlet.HomeServlet</servlet-class>

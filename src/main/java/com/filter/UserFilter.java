@@ -11,10 +11,6 @@ import java.io.IOException;
 public class UserFilter implements Filter {
     private final UserService userService = UserServiceFactory.getInstance();
 
-    @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-
-    }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
@@ -24,6 +20,7 @@ public class UserFilter implements Filter {
         String password = req.getParameter("password");
 
         if (userService.isExistUser(login, password)) {
+            res.sendRedirect("/products");
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
             res.sendRedirect(req.getContextPath() + "/registration");
@@ -31,7 +28,11 @@ public class UserFilter implements Filter {
     }
 
     @Override
-    public void destroy() {
+    public void init(FilterConfig filterConfig) throws ServletException {
 
+    }
+
+    @Override
+    public void destroy() {
     }
 }
